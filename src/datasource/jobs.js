@@ -18,19 +18,6 @@ class Jobs extends RESTDataSource {
     };
   }
 
-  async getRelatedJobs(relatedJobs) {
-    const meta = await this.get(`jobs/${id}`);
-    const job = await this.get(`jobs/${id}`);
-
-    return {
-      id: uuid,
-      title,
-      onetSocCode: onet_soc_code,
-      description,
-      related: related_job_titles.map(this.relatedJobMap)
-    };
-  }
-
   relatedJobMap({ uuid, title }) {
     return {
       id: uuid,
