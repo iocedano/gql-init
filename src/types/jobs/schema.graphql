@@ -1,12 +1,12 @@
 type RelatedJobs {
-    id: String,
+    id: String!,
     title: String,
     normalizedJobTitle: String,
     job: Job
 }
 
 type Job {
-    id: String,
+    id: String!,
     title: String,
     onetSocCode: String,
     description: String,
@@ -15,5 +15,4 @@ type Job {
 
 type Query {
     getJobById(id: String): Job
-
 }
