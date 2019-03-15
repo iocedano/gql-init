@@ -53,6 +53,7 @@
     "restoreMocks": true
   },
   "dependencies": {
+    "apollo-datasource-rest": "^0.3.2",
     "apollo-server": "^2.2.5",
     "bcrypt": "^3.0.2",
     "cuid": "^2.1.4",

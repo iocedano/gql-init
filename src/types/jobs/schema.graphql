@@ -1,0 +1,19 @@
+type RelatedJobs {
+    id: String,
+    title: String,
+    normalizedJobTitle: String,
+    job: Job
+}
+
+type Job {
+    id: String,
+    title: String,
+    onetSocCode: String,
+    description: String,
+    related: [RelatedJobs]!
+}
+
+type Query {
+    getJobById(id: String): Job
+
+}
