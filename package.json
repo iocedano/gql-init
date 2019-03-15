@@ -61,7 +61,6 @@
     "graphql-import": "^0.7.1",
     "graphql-tools": "^4.0.3",
     "lodash": "^4.17.11",
-    "mongoose": "^5.3.14",
     "validator": "^10.9.0"
   }
 }
