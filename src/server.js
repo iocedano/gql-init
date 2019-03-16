@@ -10,9 +10,8 @@ export const start = async () => {
       query: Query
     }
   `;
-  const schemaTypes = await Promise.all(TYPES.map(loadTypeSchema));
 
-  console.log(loadTypeResolvers(TYPES));
+  const schemaTypes = await Promise.all(TYPES.map(loadTypeSchema));
 
   const server = new ApolloServer({
     typeDefs: [rootSchema, schemaTypes[0]],

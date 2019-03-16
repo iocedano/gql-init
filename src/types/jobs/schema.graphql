@@ -1,18 +1,29 @@
+type Skill {
+  id: ID!,
+  name: String,
+  type: String,
+  description: String!,
+  normalizedName: String,
+  importance: Float,
+  level: Float
+}
+
 type RelatedJobs {
-    id: String!,
+    id: ID!,
     title: String,
     normalizedJobTitle: String,
     job: Job
 }
 
 type Job {
-    id: String!,
+    id: ID!,
     title: String,
     onetSocCode: String,
     description: String,
     related: [RelatedJobs]!
+    skills: [Skill]!
 }
 
 type Query {
-    getJobById(id: String): Job
+    getJobById(id: ID): Job
 }
