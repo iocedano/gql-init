@@ -24,6 +24,6 @@ type Job {
     skills: [Skill]!
 }
 
-type Query {
+ extend type Query  {
     getJobById(id: ID): Job
 }

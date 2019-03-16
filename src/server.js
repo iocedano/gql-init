@@ -6,6 +6,9 @@ const TYPES = ['jobs'];
 
 export const start = async () => {
   const rootSchema = `
+    type Query {
+      _ : Boolean
+    }
     schema {
       query: Query
     }
