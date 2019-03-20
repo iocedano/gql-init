@@ -1,35 +1,28 @@
-import { ApolloServer } from 'apollo-server'
-import { loadTypeSchema } from './utils/schema'
-import { authenticate } from './utils/auth'
-import { merge } from 'lodash'
-import config from './config'
-import { connect } from './db'
-import product from './types/product/product.resolvers'
-import coupon from './types/coupon/coupon.resolvers'
-import user from './types/user/user.resolvers'
+import { ApolloServer } from 'apollo-server';
+import { loadTypeSchema, loadTypeResolvers } from './utils/schema';
+import DataSources from './datasources';
 
-const types = ['product', 'coupon', 'user']
+const TYPES = ['jobs'];
 
 export const start = async () => {
   const rootSchema = `
+    type Query {
+      _ : Boolean
+    }
     schema {
       query: Query
-      mutation: Mutation
     }
-  `
-  const schemaTypes = await Promise.all(types.map(loadTypeSchema))
+  `;
+
+  const schemaTypes = await Promise.all(TYPES.map(loadTypeSchema));
 
   const server = new ApolloServer({
-    typeDefs: [rootSchema, ...schemaTypes],
-    resolvers: merge({}, product, coupon, user),
-    async context({ req }) {
-      const user = await authenticate(req)
-      return { user }
-    }
-  })
+    typeDefs: [rootSchema, schemaTypes[0]],
+    resolvers: loadTypeResolvers(TYPES),
+    dataSources: () => DataSources
+  });
 
-  await connect(config.dbUrl)
-  const { url } = await server.listen({ port: config.port })
+  const { url } = await server.listen({ port: 3000 });
 
-  console.log(`GQL server ready at ${url}`)
-}
+  console.log(`GQL server ready at ${url}`);
+};

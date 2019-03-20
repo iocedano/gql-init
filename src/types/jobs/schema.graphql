@@ -1,0 +1,29 @@
+type Skill {
+  id: ID!,
+  name: String,
+  type: String,
+  description: String!,
+  normalizedName: String,
+  importance: Float,
+  level: Float
+}
+
+type RelatedJobs {
+    id: ID!,
+    title: String,
+    normalizedJobTitle: String,
+    job: Job
+}
+
+type Job {
+    id: ID!,
+    title: String,
+    onetSocCode: String,
+    description: String,
+    related: [RelatedJobs]!
+    skills: [Skill]!
+}
+
+ extend type Query  {
+    getJobById(id: ID): Job
+}
