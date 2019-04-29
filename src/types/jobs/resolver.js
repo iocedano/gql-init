@@ -17,8 +17,7 @@ export default {
     }
   },
   All: {
-    __resolveType(obj, context, info) {
-      console.log(obj, context);
+    __resolveType(obj) {
       if (obj.skills) {
         return 'Job';
       }

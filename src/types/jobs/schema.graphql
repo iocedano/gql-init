@@ -29,5 +29,5 @@ union All = Job | Skill
 
 extend type Query {
     getJobById(id: ID): Job
-    getAll: All
+    getAll: [All]
 }
