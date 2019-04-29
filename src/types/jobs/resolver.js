@@ -1,20 +1,47 @@
+/* eslint-disable prettier/prettier */
 export default {
   Query: {
     getJobById: async (_, { id }, { dataSources }) => {
-      return await dataSources.jobsAPI.getJobById(id);
+      return dataSources.jobsAPI.getJobById(id);
+    },
+    getAll() {
+      return [
+        {
+          skills: [{}],
+          title: 'Job'
+        }, {
+          type: 'ss',
+          name: 'Skill'
+        }
+      ];
+    }
+  },
+  All: {
+    __resolveType(obj) {
+      if (obj.skills) {
+        return 'Job';
+      }
+
+      if (obj.type) {
+        return 'Skill';
+      }
+
+      return 'Job';
     }
   },
   Job: {
     related: async (job, _, { dataSources }) => {
-      return job.related.map( async ({ id }) => await dataSources.jobsAPI.getRelatedById(id));
+      return job.related.map(
+        async ({ id }) => dataSources.jobsAPI.getRelatedById(id)
+      );
     },
     skills: async (job, _, { dataSources }) => {
-      return await dataSources.jobsAPI.getJobSkillById(job.id);
+      return dataSources.jobsAPI.getJobSkillById(job.id);
     }
   },
   RelatedJobs: {
     job: async ({ job }, _, { dataSources }) => {
-      return await dataSources.jobsAPI.getJobById(job);
+      return dataSources.jobsAPI.getJobById(job);
     }
   }
 };
