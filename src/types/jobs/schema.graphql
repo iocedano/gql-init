@@ -24,6 +24,10 @@ type Job {
     skills: [Skill]!
 }
 
- extend type Query  {
+# Interface and Union try
+union All = Job | Skill
+
+extend type Query {
     getJobById(id: ID): Job
+    getAll: All
 }
